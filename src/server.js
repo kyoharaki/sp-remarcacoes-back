@@ -95,4 +95,7 @@ server.use("/", laudoRoute);
 server.use("/", ciretranRoute);
 server.use("/", lojaRoute);
 
-server.listen(PORT);
+server.listen(PORT, () => {
+    console.log("HOST: ", process.env.DB_HOST);
+    console.log("PORT: ", PORT);
+});
