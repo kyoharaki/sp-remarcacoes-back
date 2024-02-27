@@ -22,7 +22,7 @@ const __dirname = url.fileURLToPath(new URL('.', import.meta.url));
 dotenv.config();
 
 const server = express();
-const PORT = process.env.DB_PORT;
+const PORT = process.env.DB_PORT || 3000;
 
 server.use(express.json());
 server.use(cors(
