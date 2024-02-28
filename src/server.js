@@ -97,5 +97,5 @@ server.use("/", lojaRoute);
 
 server.listen(PORT, () => {
     console.log("HOST: ", process.env.MYSQLHOST);
-    console.log("PORT: ", MYSQLPORT);
+    console.log("PORT: ", PORT);
 });
