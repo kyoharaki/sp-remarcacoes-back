@@ -22,7 +22,7 @@ const __dirname = url.fileURLToPath(new URL('.', import.meta.url));
 dotenv.config();
 
 const server = express();
-const PORT = process.env.DB_PORT || 3000;
+const PORT = process.env.MYSQLPORT || 3000;
 
 server.use(express.json());
 server.use(cors(
@@ -96,6 +96,6 @@ server.use("/", ciretranRoute);
 server.use("/", lojaRoute);
 
 server.listen(PORT, () => {
-    console.log("HOST: ", process.env.DB_HOST);
-    console.log("PORT: ", PORT);
+    console.log("HOST: ", process.env.MYSQLHOST);
+    console.log("PORT: ", MYSQLPORT);
 });
