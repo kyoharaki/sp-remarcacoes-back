@@ -95,7 +95,7 @@ server.use("/", laudoRoute);
 server.use("/", ciretranRoute);
 server.use("/", lojaRoute);
 
-server.listen(PORT, () => {
+server.listen(PORT,"0.0.0.0", () => {
     console.log("HOST: ", process.env.MYSQLHOST);
     console.log("PORT: ", PORT);
 });
