@@ -5,9 +5,19 @@ import dotenv from "dotenv";
 dotenv.config();
 
 export const getLoja = (_,res) => {
-    const q = "SELECT * FROM `TBPARAMETROS_LOJA`";
+    const q = "SELECT PAR_MUNICIPIO FROM `TBPARAMETROS_LOJA`";
 
     db.query(q, (err, data) => {
+        if (err) return res.json(err);
+
+        return res.status(200).json(data);
+    });
+};
+
+export const getEndereco = (req,res) => {
+    const q = "SELECT PAR_ENDERECO, PAR_NUMERO, PAR_BAIRRO, PAR_UF, PAR_CNPJ FROM TBPARAMETROS_LOJA WHERE `PAR_MUNICIPIO` = ?";
+
+    db.query(q,req.params.PAR_MUNICIPIO,(err, data) => {
         if (err) return res.json(err);
 
         return res.status(200).json(data);

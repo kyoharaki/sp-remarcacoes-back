@@ -27,8 +27,8 @@ const PORT = process.env.DB_PORT || 3000;
 server.use(express.json());
 server.use(cors(
     {
-        origin: "*",
-        methods: ["POST,GET"],
+        origin: process.env.CLIENT_URL,
+        methods: ["POST,GET,PUT,DELETE"],
         credentials: true,
     }
 ));
