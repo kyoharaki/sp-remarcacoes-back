@@ -10,8 +10,8 @@ export const getLaudos = (_,res) => {
     });
 };
 
-export const getUltimoLaudo = (_,res) => {
-    const q = "SELECT * FROM sp_remarcacoes.tbLaudos ORDER BY LAU_NUMERO DESC LIMIT 1;";
+export const getLaudosCampinas = (_,res) => {
+    const q = "SELECT * FROM tbLaudosCampinas ORDER BY LAU_NUMERO DESC";
 
     db.query(q, (err, laudoData) => {
         if (err) return res.json(err);
@@ -20,10 +20,22 @@ export const getUltimoLaudo = (_,res) => {
     });
 };
 
-export const getLaudo = (req,res) => {
-    const q = "SELECT * FROM tbLaudos WHERE `LAU_PLACA` = ?";
+export const getLaudosJundiai = (_,res) => {
+    const q = "SELECT * FROM tbLaudosJundiai ORDER BY LAU_NUMERO DESC";
 
-    db.query(q,req.params.LAU_PLACA,(err, laudoData) => {
+    db.query(q, (err, laudoData) => {
+        if (err) return res.json(err);
+
+        return res.status(200).json(laudoData);
+    });
+};
+
+
+
+export const getUltimoLaudo = (_,res) => {
+    const q = "SELECT * FROM sp_remarcacoes.tbLaudos ORDER BY LAU_NUMERO DESC LIMIT 1;";
+
+    db.query(q, (err, laudoData) => {
         if (err) return res.json(err);
 
         return res.status(200).json(laudoData);
@@ -61,6 +73,36 @@ export const addLaudo = (req, res) => {
 export const updateLaudo = (req, res) => {
     const q = 
     "UPDATE tbLaudos SET `LAU_STATUS` = ? WHERE `LAU_NUMERO` = ?";
+
+    const values = [
+        req.body.LAU_STATUS
+    ];    
+
+    db.query(q,[...values,req.params.LAU_NUMERO],(err) => {
+        if (err) return res.json(err);
+
+        return res.status(200).json("Status do laudo alterado com sucesso.");
+    });
+};
+
+export const updateLaudoCampinas = (req, res) => {
+    const q = 
+    "UPDATE tbLaudosCampinas SET `LAU_STATUS` = ? WHERE `LAU_NUMERO` = ?";
+
+    const values = [
+        req.body.LAU_STATUS
+    ];    
+
+    db.query(q,[...values,req.params.LAU_NUMERO],(err) => {
+        if (err) return res.json(err);
+
+        return res.status(200).json("Status do laudo alterado com sucesso.");
+    });
+};
+
+export const updateLaudoJundiai = (req, res) => {
+    const q = 
+    "UPDATE tbLaudosJundiai SET `LAU_STATUS` = ? WHERE `LAU_NUMERO` = ?";
 
     const values = [
         req.body.LAU_STATUS
