@@ -1,7 +1,7 @@
 import dotenv from "dotenv";
 import express from "express";
 import cors from "cors";
-import multer from "multer";
+import multer, { diskStorage } from "multer";
 import cookieParser from "cookie-parser";
 import jwt from "jsonwebtoken";
 
@@ -49,7 +49,6 @@ var storage = multer.diskStorage(
 );
 
 const upload = multer({ storage: storage } )
-
 
 server.post("/upload", upload.single("file"), (req,res) => {
     res.sendStatus(200);
